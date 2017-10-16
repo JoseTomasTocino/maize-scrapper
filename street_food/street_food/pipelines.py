@@ -6,7 +6,7 @@
 # See: http://doc.scrapy.org/en/latest/topics/item-pipeline.html
 
 import requests
-
+import logging
 
 class StreetFoodPipeline(object):
     def process_item(self, item, spider):
@@ -32,8 +32,16 @@ class ApiUploader(object):
     # sparkscocial
     # and off the grid
 
+
     def process_item(self, item, spider):
-        if item['maize_id'] != 'n/a':
+
+        logger = logging.getLogger("scrapy")
+
+        skip_upload = spider.settings.get('SKIP_UPLOAD', "0") == "1"
+
+        if item['maize_id'] != 'n/a' and not skip_upload:
+            logger.info("Uploading...")
+
             data = {
                 "kitchen": item['maize_id'],
                 "open_time": item['start_datetime'],
