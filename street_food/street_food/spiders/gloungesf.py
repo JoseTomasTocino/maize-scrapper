@@ -16,18 +16,23 @@ class Gloungesf(scrapy.Spider):
         }
     }
 
-    def __init__(self, api_key):
+    def __init__(self, *args, **kwargs):
+        super(Gloungesf, self).__init__(*args, **kwargs)
+
         self.maize_vendors = basic_tools.get_maize_vendors()
-        self.api_key = api_key
+        self.api_key = kwargs['fb_api_key']
 
     @classmethod
-    def from_crawler(cls, crawler):
-        api_key = crawler.settings.get("FB_API_KEY")
-        return cls(api_key)
+    def from_crawler(cls, crawler, *args, **kwargs):
+        kwargs.update({
+            "fb_api_key": crawler.settings.get("FB_API_KEY"),
+        })
+
+        return super(Gloungesf, cls).from_crawler(crawler, *args, **kwargs)
 
     def start_requests(self):
         return [Request(self.api_url.format(self.api_key),
-                callback=self.parse)]
+                        callback=self.parse)]
 
     def parse(self, response):
         data = json.loads(response.body)

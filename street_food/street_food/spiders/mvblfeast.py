@@ -8,6 +8,7 @@ from street_food.tools.mvblfeast_tools import get_geolocation, get_new_events
 
 import logging
 
+
 class Mvblfeast(scrapy.Spider):
     name = "mvblfeast"
     fb_api_url = "https://graph.facebook.com/MVBLfeast/events?access_token={}"
@@ -19,6 +20,8 @@ class Mvblfeast(scrapy.Spider):
     }
 
     def __init__(self, *pargs, **kwargs):
+        super(Mvblfeast, self).__init__(*pargs, **kwargs)
+
         self.maize_vendors = basic_tools.get_maize_vendors()
 
         self.fb_api_key = kwargs['fb_api_key']
@@ -26,19 +29,22 @@ class Mvblfeast(scrapy.Spider):
         self.here_app_code = kwargs['here_app_code']
 
     @classmethod
-    def from_crawler(cls, crawler):
-        args = {
+    def from_crawler(cls, crawler, *args, **kwargs):
+        kwargs.update({
             "fb_api_key": crawler.settings.get("FB_API_KEY"),
             "here_app_id": crawler.settings.get("HERE_APP_ID"),
             "here_app_code": crawler.settings.get("HERE_APP_CODE")
-        }
-        return cls(**args)
+        })
+        
+        return super(Mvblfeast, cls).from_crawler(crawler, *args, **kwargs)
 
     def start_requests(self):
         return [Request(self.fb_api_url.format(self.fb_api_key),
-                callback=self.parse)]
+                        callback=self.parse)]
 
     def parse(self, response):
+        logging.debug(self.settings)
+
         data = json.loads(response.body)
         # last_event = data['data'][0]
         # desc = last_event['description']
@@ -64,8 +70,8 @@ class Mvblfeast(scrapy.Spider):
 
         else:
             latitude, longitude = get_geolocation(address,
-                                              self.here_app_id,
-                                              self.here_app_code)
+                                                  self.here_app_id,
+                                                  self.here_app_code)
 
         item = StreetFoodDatTimeItem()
         item['VendorName'] = vendor_name
