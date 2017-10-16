@@ -56,13 +56,13 @@ class Mvblfeast(scrapy.Spider):
     def make_item(self, vendor_name, last_event):
         event_location = last_event.get("place").get('location', {})
 
+        address = last_event.get("place").get("name")
+
         if 'longitude' in event_location and 'latitude' in event_location:
             latitude = event_location['latitude']
             longitude = event_location['longitude']
 
         else:
-            address = last_event.get("place").get("name")
-
             latitude, longitude = get_geolocation(address,
                                               self.here_app_id,
                                               self.here_app_code)
