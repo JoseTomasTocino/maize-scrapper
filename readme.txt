@@ -10,6 +10,7 @@ cd street-food-scraper && source bin/activate
 git clone https://github.com/kirimaks/street-food-scraper.git && cd street-food-scraper
 
 4. Install requirements:
+# On Ubuntu/Debian: sudo apt install python-dev libssl-dev libxml2-dev libxslt1-dev liblzma-dev
 pip install -r requirements.txt
 
 5. Run scraper:

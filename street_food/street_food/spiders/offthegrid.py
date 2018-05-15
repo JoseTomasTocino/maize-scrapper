@@ -29,7 +29,7 @@ class GetFoodOffTheGrid(scrapy.Spider):
         }
     }
 
-    authorization_header = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJJbmZyYXN0cnVja3R1cmUiLCJpYXQiOjE1MDU0MTQ4ODYsImV4cCI6MTUwODAwNjg4NiwiYXVkIjoiaW5mcmFzdHJ1Y2t0dXJlLmNvbSIsInN1YiI6Ijc3NjczZTUxLWIxY2UtNDg2OS05Yjg0LWQyZDQ0YmMxMzFhNCIsIm9yZyI6ImZrSFZzSnA4ZmtxTEo0VllnMkxZeUN1SFJMRGQ5TTBOQzArVGl0MVBjcDlFOHpmcSIsImp0aSI6InB1YmxpYy1hcGkifQ.lvYfPWszTo52DB9gGziHQ928Kp9TnGu - fRAhcneYEj4"
+    authorization_header = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJJbmZyYXN0cnVja3R1cmUiLCJpYXQiOjE1MjYzNDk2MTQsImV4cCI6MTUyODk0MTYxNCwiYXVkIjoiaW5mcmFzdHJ1Y2t0dXJlLmNvbSIsInN1YiI6Ijc3NjczZTUxLWIxY2UtNDg2OS05Yjg0LWQyZDQ0YmMxMzFhNCIsIm9yZyI6ImZrSFZzSnA4ZmtxTEo0VllnMkxZeUN1SFJMRGQ5TTBOQzArVGl0MVBjcDlFOHpmcSIsImp0aSI6InB1YmxpYy1hcGkifQ.bR_vgl5PMze64XQlCvprgJ5fQqn6OkDY77GMySIEg6g"
 
     def start_requests(self):
         urls = [

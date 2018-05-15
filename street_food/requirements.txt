@@ -32,3 +32,7 @@ Twisted==16.3.0
 w3lib==1.14.2
 wheel==0.24.0
 zope.interface==4.2.0
+beautifulsoup4==4.6.0
+fuzzywuzzy==0.16.0
+python-dateutil==2.7.3
+requests==2.18.4
